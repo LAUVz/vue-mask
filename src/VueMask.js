@@ -1,29 +1,21 @@
-let Masker = {
-  flags: {
-    '9': /[0-9]/,
-    'A': /[A-Z]/,
-    'a': /[a-z]/,
-    'c': /[A-z]/
-  }
-};
+let Masker = {};
 
-Masker.parse = function(input, format) {
-  format = format.split('');
-  input = input.split('');
+Masker.parse = function(input, mask) {
+  var output = '',
+    data = input;
 
-  let output = '';
+  for (let i = 0, x = 1; x && i < mask.length; i++) {
+    let c = data.charAt(i);
+    let m = mask.charAt(i);
 
-  for (var i = 0; i < input.length; i++) {
-    let c = input[i];
-
-    if(output.length === format.length) break;
-
-
-    if(c.match(this.flags[format[i]]) && typeof this.flags[format[i]] !== 'undefined') {
-      output += c;
-    } else if(typeof this.flags[format[i]] === 'undefined') {
-      output += format[i];
-    } else break;
+    switch (mask.charAt(i)) {
+      case '9': if(/\d/.test(c)) output += c; else x = 0; break;
+      case 'A': if(/[A-Z]/.test(c)) output += c; else x = 0; break;
+      case 'a': if(/[a-z]/i.test(c)) output += c; else x = 0; break;
+      case 'c': if(/[a-z0-9]/i.test(c)) output += c; else x = 0; break;
+      case 'X': output += c; break;
+      default: output += m; break;
+    }
   }
 
   return output;
