@@ -5,9 +5,10 @@
 ## Formatting flags
 ```js
 {
-  '9': /[0-9]/, // any number
+  '9': /\d/, // any digit
   'A': /[A-Z]/, // any uppercase letter
   'a': /[a-z]/, // any lowercase letter
+  'C': /[A-z0-9]/, // any alphanumeric character
   'c': /[A-z]/ // any letter
 }
 ```
@@ -18,7 +19,7 @@
   <input type="text" v-mask="(999) 999-9999">
 ```
 
-## Build Setup
+## Development Setup
 
 ``` bash
 # install dependencies

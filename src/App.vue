@@ -19,10 +19,7 @@
 <script>
 export default {
   data () {
-    return {
-      msg: 'Hello vue-mask!',
-      phone: ''
-    }
+    return { msg: 'Hello vue-mask!' }
   }
 }
 </script>
